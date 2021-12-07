@@ -3,7 +3,7 @@
 
     <b-container>
         
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form @submit="onSubmit" v-if="show">
 
         <b-form-group
             id="input-group-1"
@@ -30,17 +30,18 @@
 </template>
 
 <script>
-  export default {
-    props:{
-        items: Array
+    const axios = require('axios')
 
-      },
+    export default {
+        props:{
+            items: Array
+        },
         data(){
             return {
             form: {
             name: '',
             },
-            show: true
+            show: true,
         }  
         },
         mounted(){
@@ -49,12 +50,31 @@
     methods: {
       onSubmit(event) {
         event.preventDefault()
+        this.fetchBusinesses(-1)
         // alert(JSON.stringify(this.form))
       },
       
       fetchBusinesses(which){
+          console.log(which)
           if (which == -1){
               //get all
+
+            axios.get(
+                'http://localhost:3000/company/all',
+                {'body':{}},
+                {}
+            ).then( (response) => {
+                if (response.status==200) {
+                    
+
+                    this.items = response.data
+
+
+                    // alert("got 200")
+                    // this.$emit('updateThing', this.items)
+                }
+                console.log(response)
+            })
           }else{
               //find specifc by id
           }
