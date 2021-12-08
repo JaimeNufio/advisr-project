@@ -3,8 +3,8 @@
 
 
     <NavbarComponent/>
-    <WelcomeComponent class="mt-5" @updateThing="newRows"></WelcomeComponent>
-    <TableComponent :items="items"></TableComponent>
+    <WelcomeComponent class="mt-5"></WelcomeComponent>
+    <TableComponent ></TableComponent>
 
   </div>
 </template>
@@ -25,9 +25,7 @@ export default {
   },
   data(){
     return {
-      items:[
 
-    ]
   }
   },
   methods:{
@@ -41,12 +39,5 @@ export default {
 
 
 <style>
-#app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50; */
-}
 
 </style>

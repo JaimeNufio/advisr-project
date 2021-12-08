@@ -21,8 +21,5 @@
 
 <style scoped>
 
-    .shell{
-        /* background-color: #F00; */
-    }
 
 </style>

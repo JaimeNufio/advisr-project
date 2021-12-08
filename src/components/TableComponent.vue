@@ -1,28 +1,37 @@
 <template>
   <div>
-
+      
     <b-container>
         
         <b-form @submit="onSubmit" v-if="show">
 
-        <b-form-group
+        <b-form-group  class="px-5 mx-5"
             id="input-group-1"
             label="Filter By Name:"
             label-for="input-1"
-
         >
             <b-form-input
             id="input-1"
-            v-model="form.name"
+            v-model="filter"
             type="text"
             placeholder=""
             required
             ></b-form-input>
-              <b-button type="submit" variant="primary">Submit</b-button>
+              <!-- <b-button type="submit" variant="primary">Submit</b-button> -->
+              <!-- <p>Filtering by: {{filter}}</p> -->
         </b-form-group>
         </b-form>
 
-        <b-table striped hover :items="items"></b-table>
+        <b-table striped hover 
+            :items="filteredItems"
+            :fields="fields"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+            responsive="sm"
+        ></b-table>
+
+            
+
 
     </b-container>
 
@@ -36,50 +45,64 @@
         props:{
             items: Array
         },
+
         data(){
             return {
-            form: {
-            name: '',
-            },
-            show: true,
-        }  
+
+                sortBy: 'age',
+                sortDesc: false,
+                fields: [
+                    { key: 'Business Name', sortable: true },
+                    { key: 'Category', sortable: true },
+                    { key: 'Number of Campaigns', sortable: true },
+                    { key: 'Average Campaign Budget', sortable: true }
+
+                ],
+                form: {
+                name: '',
+                },
+                show: true,
+            }
         },
+            
+
         mounted(){
-          
+           this.fetchBusinesses()
         },
     methods: {
       onSubmit(event) {
         event.preventDefault()
-        this.fetchBusinesses(-1)
-        // alert(JSON.stringify(this.form))
+        console.log(this.filter)
       },
       
-      fetchBusinesses(which){
-          console.log(which)
-          if (which == -1){
-              //get all
-
+      fetchBusinesses(){
+     
             axios.get(
                 'http://localhost:3000/company/all',
-                {'body':{}},
-                {}
+                {},
             ).then( (response) => {
                 if (response.status==200) {
-                    
-
                     this.items = response.data
-
-
-                    // alert("got 200")
-                    // this.$emit('updateThing', this.items)
+                    console.log(this.items)
+                    console.log(this.filteredItems)
                 }
-                console.log(response)
-            })
-          }else{
-              //find specifc by id
-          }
-      }
+            }
+        )
+      },
+        
+   },
+    computed:{
+        
+    filteredItems(){
 
-   }
+            //  return this.items
+        if (!this.filter ) { return this.items }
+
+        return this.items.filter( (el) => 
+            el['Business Name'].indexOf("Hank") > -1
+        )
+    
+    }
+    }
 }
 </script>

@@ -3,8 +3,7 @@ const data = require('./business-list.json')
 const app = express()
 const port = 3000
 
-app.get('/company/all', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
+const transform = (data) => { 
 
     let output = []
 
@@ -26,17 +25,29 @@ app.get('/company/all', (req, res) => {
             "Business Name":el.name,
             "Category":el.category,
             "Number of Campaigns":el.campaigns.length,
-            "Average Campaign":  calcAvg(el)   
+            "Average Campaign Budget":  calcAvg(el)   
         }
     ))
 
-    res.send(output)
+    return output
+}
+
+app.get('/company/all', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    res.send(transform(data))
     
 })
 
 app.get('/company', (req, res) => {
-    res.send(data[req.query.index])
+    res.header("Access-Control-Allow-Origin", "*");
+    res.send(transform([data[req.query.index]]))
 })
+
+app.get('/', (req, res) => {
+    res.send('EHE')
+})
+  
   
 
 app.listen(port, () => {
