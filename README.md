@@ -1,4 +1,4 @@
-# advisr
+# ADVISR
 
 Vue.js / Express.js Project
 - `axios` for Api calls
