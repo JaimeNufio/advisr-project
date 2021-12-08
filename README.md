@@ -1,5 +1,21 @@
 # advisr
 
+Vue.js / Express.js Project
+- `axios` for Api calls
+- `vue2-google-maps` for Google Maps integration
+- `vue-bootstrap` as design framework 
+
+## Images:
+
+
+## Setup Google Maps Key
+Rename 'key-example.json' to 'key.json'
+in the empty value for 'googlemaps' paste your api key. It should have the following permissions:
+
+...
+
+You can create your API keys here: https://console.cloud.google.com/home/dashboard?project=solid-scheme-334505
+
 ## Front-End Setup
 ```
 yarn install
@@ -16,6 +32,9 @@ yarn build
 ```
 
 ## API Setup
+
+run the following in a seperate terminal
 ```
 node api/api.js
 ```
+
