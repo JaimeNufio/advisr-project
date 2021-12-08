@@ -6,7 +6,10 @@ Vue.js / Express.js Project
 - `vue-bootstrap` as design framework 
 
 ## Images:
-
+![Landing Page](https://github.com/JaimeNufio/advisr-project/blob/master/images/landingpage.png)
+![Google API](https://github.com/JaimeNufio/advisr-project/blob/master/images/googleapi.png)
+![Details](https://github.com/JaimeNufio/advisr-project/blob/master/images/details.png)
+![Overview](https://github.com/JaimeNufio/advisr-project/blob/master/images/Overview.png)
 
 ## Setup Google Maps Key
 Rename 'key-example.json' to 'key.json'
