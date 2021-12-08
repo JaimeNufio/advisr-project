@@ -1,41 +1,56 @@
 <template>
   <div id="app">
+    <div class="jumbo pt-4 mb-4">
 
-    <b-container class="text-center py-4 mt-5">
+    <b-container class="text-left pb-4">
+        
+        <b-breadcrumb class="jumbo bread">
+            <b-breadcrumb-item class="bread" href="/">Landing Page</b-breadcrumb-item>
+            <b-breadcrumb-item class="bread" href="/overview">Business Overview</b-breadcrumb-item>
+            <b-breadcrumb-item class="bread active" active>{{this.details.name}}</b-breadcrumb-item>
+        </b-breadcrumb>
+
         <h1>{{this.details.name}}</h1>
 
-        <b-container class="mb-5">
-            <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut quae accusamus quam nihil autem mollitia distinctio pariatur dicta unde minima minus sunt officia error iure ducimus maxime, laboriosam, repudiandae fugiat?</h6>
-        </b-container>
+        <div class="mb-5">
+            <p>Find the list of Campaigns, and the location of the business below.
+            </p>
+        </div>
 
-        <b-row>
-            <b-col>
-                <b-table striped hover 
+
+    </b-container>
+    </div>
+
+    <b-container>
+                        <div>
+                <h3>Campaigns</h3>
+                <b-table class="mt-4" striped hover 
                     :items="this.details.campaigns"
                     :fields="fields"
                     :sort-by.sync="sortBy"
                     :sort-desc.sync="sortDesc"
                     responsive="sm">
                 </b-table>
-            </b-col>
-            <b-col>
-            </b-col>
-        </b-row>
-    
+                </div>
+                                <div class="p-3">
+                    <GoogleMapComponent :target="this.details.location"/>
+                </div>
     </b-container>
-
 
   </div>
 </template>
 
 <script>
 import axios from "axios"
+import GoogleMapComponent from '@/components/GoogleMapComponent.vue'
+
 
 export default {
   name: 'Company',
   props: {
     },
   components:{
+      GoogleMapComponent
   },
   data(){
     return {
@@ -44,10 +59,10 @@ export default {
         fields:[
             { key: 'name', sortable: true },
             { key: 'budget', sortable: true },
-        ]
+        ],
     }
   },
-  mounted(){
+  created(){
         let uri = window.location.search.substring(1); 
         let params = new URLSearchParams(uri);
         this.index =params.get('index') 
@@ -60,9 +75,10 @@ export default {
                 this.details = response.data
             }
         })
-    }
+    },
 }
 </script>
 
+<style scoped>
 
-<style>
+</style>

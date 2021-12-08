@@ -1,6 +1,6 @@
 # advisr
 
-## Project setup
+## Front-End Setup
 ```
 yarn install
 ```
@@ -15,10 +15,7 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
+## API Setup
 ```
-yarn lint
+node api/api.js
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

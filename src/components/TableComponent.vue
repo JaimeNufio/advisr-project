@@ -1,34 +1,40 @@
 <template>
-  <div>
-      
-    <b-container>
+    <div class="text-center pb-5">
         
-            <b-form-input
-            id="input-1"
-            v-model="filter"
-            type="text"
-            placeholder=""
-            required
-            ></b-form-input>
+        <div class="jumbo  p-4">
+        <b-container class="">
+            <b-form-group class="filter text-left pt-2 px-5 "
+                label="Filter:"
+                label-for="input"
+            >
+                <b-form-input
+                    class=""
+                    id="input"
+                    v-model="filter"
+                    type="text"
+                    placeholder=""
+                    required
+                ></b-form-input>
+            </b-form-group>
+        </b-container>
 
-        <b-table striped hover 
-            :items="filteredItems"
-            :fields="fields"
-            :sort-by.sync="sortBy"
-            :sort-desc.sync="sortDesc"
-            responsive="sm"
-        >
+    </div>
+
+        <b-container class="mt-4" style="">
+            <h1 class="text-left">Filtered Businesses</h1>
+            <b-table class="mt-3 table" striped hover 
+                :items="this.filteredItems"
+                :fields="fields"
+                :sort-by.sync="sortBy"
+                :sort-desc.sync="sortDesc"
+                responsive="sm"
+            >
             <template #cell(BusinessName)="row">
-                <b-link :href="`/company?index=${row.item.id}`">{{row.item.BusinessName}}</b-link>
+                <b-link  :href="`/company?index=${row.item.id}`" class="tablelink">{{row.item.BusinessName}}</b-link>
             </template>
-        
-        </b-table>
-
             
-
-
-    </b-container>
-
+            </b-table>
+        </b-container>
   </div>
 </template>
 
@@ -80,12 +86,47 @@ export default {
    watch: {
        filter(val){
             console.log(val)
-            if (val == null || val == "" || val == undefined) {this.filteredItems = this.items; return} 
+
+            let got = this.items.filter( (el) => 
+                el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
+            )
+            console.log(got)
+            if (got.length > 0){
+                this.filteredItems = got
+            }else{
+                this.filteredItems = this.items
+            }
         
-        this.filteredItems = this.items.filter( (el) => 
-            el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
-        )}
+        }
     }
+    // computed:{
+    //     filteredItems:{
+        
+    //     get: function(){
+    //         let val = this.filter
+    //         console.log(val)
+
+    //         // if (val == null || val == "" || val == undefined) {return this.items} 
+            
+    //         let got =  this.items.filter( (el) => 
+    //             el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
+    //         )
+
+    //         if (got.length > 0){
+    //             return got
+    //         }else{
+    //             return this.items
+    //         }
+    //     },
+    //     set: function(newValue) {
+    //         console.log(newValue)
+    //     }
+    // }
+    // }
 }
 
 </script>
+
+<style scoped>
+
+</style>

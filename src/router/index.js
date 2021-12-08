@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import Missing from '../views/Missing.vue'
+import Overview from '../views/Overview.vue'
 import Company from '../views/Company.vue'
+import LandingPage from '../views/LandingPage.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -13,9 +17,14 @@ const routes = [
     component: Company
   },
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/overview',
+    name: 'Overview',
+    component: Overview
+  },
+  {
+    path:'/',
+    name: 'LandingPage',
+    component: LandingPage
   },
   //TODO Add page about me?
   // {
