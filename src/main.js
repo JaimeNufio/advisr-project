@@ -15,9 +15,11 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(axios)
 
+const apiKey = require('../key.json')
+
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyBOWi8xvY8IjGbncoCwX7fyfDNx2Qm1dKo',
+    key: apiKey.googlemaps,
     libraries: 'places',
   }
 });
