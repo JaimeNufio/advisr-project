@@ -22,10 +22,11 @@ const transform = (data) => {
 
     data.forEach(el => output.push(
         {
-            "Business Name":el.name,
+            "BusinessName":el.name,
             "Category":el.category,
             "Number of Campaigns":el.campaigns.length,
-            "Average Campaign Budget":  calcAvg(el)   
+            "Average Campaign Budget":  calcAvg(el),
+            "id":el.id-1
         }
     ))
 
@@ -39,9 +40,9 @@ app.get('/company/all', (req, res) => {
     
 })
 
-app.get('/company', (req, res) => {
+app.get('/company/details', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.send(transform([data[req.query.index]]))
+    res.send((data[req.query.index]))
 })
 
 app.get('/', (req, res) => {

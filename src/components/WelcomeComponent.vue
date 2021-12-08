@@ -1,5 +1,5 @@
 <template>
-    <b-container class="shell text-center px-auto py-4">
+    <b-container class="text-center px-auto py-4">
 
         <h1>Lorem Ipsum</h1>
 

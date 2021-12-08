@@ -3,13 +3,6 @@
       
     <b-container>
         
-        <b-form @submit="onSubmit" v-if="show">
-
-        <b-form-group  class="px-5 mx-5"
-            id="input-group-1"
-            label="Filter By Name:"
-            label-for="input-1"
-        >
             <b-form-input
             id="input-1"
             v-model="filter"
@@ -17,10 +10,6 @@
             placeholder=""
             required
             ></b-form-input>
-              <!-- <b-button type="submit" variant="primary">Submit</b-button> -->
-              <!-- <p>Filtering by: {{filter}}</p> -->
-        </b-form-group>
-        </b-form>
 
         <b-table striped hover 
             :items="filteredItems"
@@ -28,7 +17,12 @@
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
             responsive="sm"
-        ></b-table>
+        >
+            <template #cell(BusinessName)="row">
+                <b-link :href="`/company?index=${row.item.id}`">{{row.item.BusinessName}}</b-link>
+            </template>
+        
+        </b-table>
 
             
 
@@ -41,34 +35,28 @@
 <script>
     const axios = require('axios')
 
-    export default {
-        props:{
-            items: Array
-        },
+export default {
+    data(){
+        return {
 
-        data(){
-            return {
+            sortBy: 'age',
+            sortDesc: false,
+            fields: [
+                { key: 'BusinessName', sortable: true },
+                { key: 'Category', sortable: true },
+                { key: 'Number of Campaigns', sortable: true },
+                { key: 'Average Campaign Budget', sortable: true }
 
-                sortBy: 'age',
-                sortDesc: false,
-                fields: [
-                    { key: 'Business Name', sortable: true },
-                    { key: 'Category', sortable: true },
-                    { key: 'Number of Campaigns', sortable: true },
-                    { key: 'Average Campaign Budget', sortable: true }
-
-                ],
-                form: {
-                name: '',
-                },
-                show: true,
-            }
-        },
-            
-
-        mounted(){
-           this.fetchBusinesses()
-        },
+            ],
+            filter:"",
+            filteredItems:[],
+            show: true,
+        }
+    },
+        
+    mounted(){
+        this.fetchBusinesses()
+    },
     methods: {
       onSubmit(event) {
         event.preventDefault()
@@ -76,33 +64,28 @@
       },
       
       fetchBusinesses(){
-     
+            console.log(this.filter)
             axios.get(
                 'http://localhost:3000/company/all',
                 {},
             ).then( (response) => {
                 if (response.status==200) {
                     this.items = response.data
-                    console.log(this.items)
-                    console.log(this.filteredItems)
+                    this.filteredItems = this.items
                 }
             }
         )
-      },
-        
+      },  
    },
-    computed:{
+   watch: {
+       filter(val){
+            console.log(val)
+            if (val == null || val == "" || val == undefined) {this.filteredItems = this.items; return} 
         
-    filteredItems(){
-
-            //  return this.items
-        if (!this.filter ) { return this.items }
-
-        return this.items.filter( (el) => 
-            el['Business Name'].indexOf("Hank") > -1
-        )
-    
-    }
+        this.filteredItems = this.items.filter( (el) => 
+            el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
+        )}
     }
 }
+
 </script>
