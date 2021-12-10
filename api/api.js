@@ -1,7 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const data = require('./business-list.json')
 const app = express()
 const port = 3000
+
+app.use(cors())
 
 const transform = (data) => { 
 
@@ -34,14 +37,13 @@ const transform = (data) => {
 }
 
 app.get('/company/all', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-
+    // res.header("Access-Control-Allow-Origin", "*");
     res.send(transform(data))
     
 })
 
 app.get('/company/details', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    // res.header("Access-Control-Allow-Origin", "*");
     res.send((data[req.query.index]))
 })
 
@@ -49,8 +51,6 @@ app.get('/', (req, res) => {
     res.send('EHE')
 })
   
-  
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

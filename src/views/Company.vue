@@ -70,7 +70,8 @@ export default {
         axios.get(
             'http://localhost:3000/company/details',
             {params:{index:this.index}},
-        ).then( (response) => {
+        ).catch((e)=>console.log(e))
+        .then( (response) => {
             if (response.status==200) {
                 this.details = response.data
             }

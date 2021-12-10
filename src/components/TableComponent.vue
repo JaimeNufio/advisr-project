@@ -54,8 +54,9 @@ export default {
                 { key: 'Average Campaign Budget', sortable: true }
 
             ],
+            items:[],
             filter:"",
-            filteredItems:[],
+            // filteredItems:[],
             show: true,
         }
     },
@@ -70,11 +71,14 @@ export default {
       },
       
       fetchBusinesses(){
-            console.log(this.filter)
+            // console.log(this.filter)
+            
             axios.get(
                 'http://localhost:3000/company/all',
                 {},
-            ).then( (response) => {
+            )
+            .catch((e)=>console.log(e))
+            .then( (response) => {
                 if (response.status==200) {
                     this.items = response.data
                     this.filteredItems = this.items
@@ -83,46 +87,30 @@ export default {
         )
       },  
    },
-   watch: {
-       filter(val){
+
+    computed:{
+        filteredItems:{
+        
+        get: function(){
+            let val = this.filter
             console.log(val)
 
-            let got = this.items.filter( (el) => 
+            let filteredSet =  this.items.filter( (el) => 
                 el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
             )
-            console.log(got)
-            if (got.length > 0){
-                this.filteredItems = got
+
+            if (filteredSet.length > 0){
+                return filteredSet
             }else{
-                this.filteredItems = this.items
+                return this.items
             }
-        
+        },
+
+        set: function(newValue) {
+            console.log(newValue)
         }
     }
-    // computed:{
-    //     filteredItems:{
-        
-    //     get: function(){
-    //         let val = this.filter
-    //         console.log(val)
-
-    //         // if (val == null || val == "" || val == undefined) {return this.items} 
-            
-    //         let got =  this.items.filter( (el) => 
-    //             el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
-    //         )
-
-    //         if (got.length > 0){
-    //             return got
-    //         }else{
-    //             return this.items
-    //         }
-    //     },
-    //     set: function(newValue) {
-    //         console.log(newValue)
-    //     }
-    // }
-    // }
+    }
 }
 
 </script>

@@ -4,7 +4,7 @@
     <router-view/>
 
     <div class="footer-copyright text-center py-3 mt-5 ">
-      <mdb-container class="bottom-block p-3">
+      <b-container class="bottom-block p-3 ">
         <span> Jaime Nufio </span>
           <a href="https://github.com/JaimeNufio" size="sm" class="mx-2 my-2 my-sm-0 myicon" type="submit">
             <b-icon-github/>
@@ -15,7 +15,7 @@
           <a href="https://www.instagram.com/jaimenufio/" size="sm" class="mx-2 my-2 my-sm-0 myicon" type="submit">
             <b-icon-instagram/>
           </a>
-      </mdb-container>
+      </b-container>
     </div>
 
   </div>

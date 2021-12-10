@@ -31,7 +31,7 @@
                         Quickly view information to make the right business decisions.
                         </b-card-text>
 
-                        <b-button href="/Collaborate" variant="primary">Find Out More</b-button>
+                        <b-button href="/Plan" variant="primary">Find Out More</b-button>
                     </b-card>
                     </div>
             </b-col>
@@ -50,7 +50,7 @@
                             Gather past data in one point to better understand the bigger picture.
                         </b-card-text>
 
-                        <b-button href="/Plan" variant="primary">Find Out More</b-button>
+                        <b-button href="/Organize" variant="primary">Find Out More</b-button>
                     </b-card>
                     </div>
             </b-col>

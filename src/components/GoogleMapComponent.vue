@@ -3,7 +3,7 @@
 
     <GmapMap  
       :center='center'
-      :zoom='12.5'
+      :zoom='17.5'
       style='width:100%;  height: 400px;'
       >
       <GmapMarker
