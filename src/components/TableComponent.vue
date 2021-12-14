@@ -29,10 +29,19 @@
                 responsive="sm"
             >
             <template #cell(name)="row">
-                <b-link  :to="`/company?index=${row.item.company_id}`" class="tablelink">{{row.item.name}}</b-link>
+                <b-link >
+                    <router-link  
+                    class="tablelink" 
+                    :to="{
+                        name:'Company',
+                        query:{index:row.item.company_id}
+                    }">
+                        {{row.item.name}}
+                    </router-link></b-link>
             </template>
-
-            
+            <template #cell(avg)="row">
+                <b  class="">{{"$"+row.item.avg}}</b>
+            </template>
 
             </b-table>
         </b-container>

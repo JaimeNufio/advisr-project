@@ -2,7 +2,7 @@
     <div>
       <div>
         <b-navbar class="mynavbar" toggleable="lg" type="dark" variant="info">
-          <b-navbar-brand class="branding" href="/">ADVISR</b-navbar-brand>
+          <b-navbar-brand class="branding" :to="{name:'LandingPage'}">ADVISR</b-navbar-brand>
 
           <b-collapse is-nav>
          <b-navbar-nav class="ml-auto">

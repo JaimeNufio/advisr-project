@@ -17,6 +17,6 @@ CREATE TABLE campaign(
 CREATE TABLE loc(
     location_id SERIAL PRIMARY KEY,
     lat FLOAT,
-    long FLOAT,
+    lng FLOAT,
     company_id INTEGER REFERENCES company(company_id)
 );

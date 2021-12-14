@@ -5,7 +5,7 @@
     <b-container>
     <b-jumbotron class="jumbo"  header="Advisr Applicant Project" lead="Jaime Nufio">
         <p>Vue.js / Express.js, Axios for Rest Calls, Implements Google Maps API</p>
-        <b-button variant="success" href="/overview">Click Here To Get Started</b-button>
+        <b-button variant="success" :to="{name:`Overview`}">Click Here To Get Started</b-button>
     </b-jumbotron>
     </b-container>
     </div>

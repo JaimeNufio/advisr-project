@@ -5,8 +5,8 @@
     <b-container class=" text-left px-auto pt-4 ">
 
         <b-breadcrumb class="jumbo bread">
-            <b-breadcrumb-item class="bread" href="/">Landing Page</b-breadcrumb-item>
-            <b-breadcrumb-item class="bread active" active href="/overview">Business Overview</b-breadcrumb-item>
+            <b-breadcrumb-item class="bread" :to="{name:'LandingPage'}">Landing Page</b-breadcrumb-item>
+            <b-breadcrumb-item class="bread active" active :to="{name:'Overview'}">Business Overview</b-breadcrumb-item>
         </b-breadcrumb>
         <div>
             <h1>Business Campaign Overview</h1>
