@@ -56,13 +56,32 @@ app.post("/campaign",async(req,res) => {
 app.get("/company/details",async(req,res)=>{
   try{
   const allCampaigns = await pool.query(
-    "SELECT loc.lat,loc.long,comp.name,cam.budget\
+    "SELECT loc.lat,loc.long,comp.name as companyname,cam.name as campaignname,cam.budget,comp.description as desc\
      FROM company comp\
-     LEFT JOIN campaign cam ON comp.company_id = cam.company_id\
+     RIGHT JOIN campaign cam ON comp.company_id = cam.company_id\
      LEFT JOIN loc ON cam.company_id = loc.company_id\
-     AND comp.company_id = $1;",[req.query.id])
-  console.log(allCampaigns.rows)
-  res.json(allCampaigns.rows)
+     WHERE comp.company_id = $1",[req.query.index])
+
+    let companyDetails = {}
+    companyDetails.location = {
+      "lat":allCampaigns.rows[0].lat,
+      "lng":allCampaigns.rows[0].long,
+    }
+    
+    companyDetails.campaigns = []
+    companyDetails.name = allCampaigns.rows[0].companyname
+    companyDetails.desc = allCampaigns.rows[0].desc
+
+    for (let i = 0; i< allCampaigns.rows.length; i++){
+      companyDetails.campaigns.push({
+        "name":allCampaigns.rows[i]['campaignname'],
+        "budget":allCampaigns.rows[i]['budget']
+      })
+    }
+
+  console.log(companyDetails)
+  res.json(companyDetails)
+
   }catch(err){ console.log(err) }
 })
 

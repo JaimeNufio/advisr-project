@@ -11,6 +11,7 @@
         </b-breadcrumb>
 
         <h1>{{this.details.name}}</h1>
+        <p>{{this.details.desc}}
 
         <div class="mb-5">
             <p>Find the list of Campaigns, and the location of the business below.
