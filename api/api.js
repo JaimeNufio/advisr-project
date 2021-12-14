@@ -45,10 +45,13 @@ app.get("/company/all",async(req,res)=>{
 app.post("/campaign",async(req,res) => {
   try{
     const {name,budget,company_id} = req.body;
+
+    console.log(req)
+
     const addCampaign = await pool.query(
       "INSERT INTO campaign(name,budget,company_id)\
-      VALUES($1,$2,$3) RETURNING *",[name,budget,company_id])
-
+      VALUES($1,$2,$3)",[name,budget,company_id])
+    console.log(addCampaign)
     res.json(addCampaign)
   }catch(err){ console.log(err);}
 })
