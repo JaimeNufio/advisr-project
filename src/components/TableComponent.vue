@@ -17,7 +17,6 @@
                 ></b-form-input>
             </b-form-group>
         </b-container>
-
     </div>
 
         <b-container class="mt-4" style="">
@@ -29,8 +28,8 @@
                 :sort-desc.sync="sortDesc"
                 responsive="sm"
             >
-            <template #cell(BusinessName)="row">
-                <b-link  :href="`/company?index=${row.item.id}`" class="tablelink">{{row.item.BusinessName}}</b-link>
+            <template #cell(name)="row">
+                <b-link  :to="`/company?index=${row.item.company_id}`" class="tablelink">{{row.item.name}}</b-link>
             </template>
             
             </b-table>
@@ -48,10 +47,10 @@ export default {
             sortBy: 'age',
             sortDesc: false,
             fields: [
-                { key: 'BusinessName', sortable: true },
-                { key: 'Category', sortable: true },
-                { key: 'Number of Campaigns', sortable: true },
-                { key: 'Average Campaign Budget', sortable: true }
+                { key: 'name', sortable: true },
+                { key: 'category', sortable: true },
+                { key: 'camcount', label: "Number of Campaigns", sortable: true },
+                { key: 'avg', sortable: true }
 
             ],
             items:[],
@@ -96,14 +95,16 @@ export default {
             console.log(val)
 
             let filteredSet =  this.items.filter( (el) => 
-                el['BusinessName'].toLowerCase().indexOf(val.toLowerCase()) > -1
+                el['name'].toLowerCase().indexOf(val.toLowerCase()) > -1
             )
 
-            if (filteredSet.length > 0){
-                return filteredSet
-            }else{
-                return this.items
-            }
+            // if (filteredSet.length > 0){
+            //     return filteredSet
+            // }else{
+            //     return this.items
+            // }
+
+            return filteredSet
         },
 
         set: function(newValue) {
