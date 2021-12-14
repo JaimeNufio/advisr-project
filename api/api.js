@@ -23,7 +23,7 @@ app.post("/company",async(req,res) => {
 app.get("/company/all",async(req,res)=>{
   try{
     const allCompanies = await pool.query(
-      "SELECT comp.company_id,comp.name,comp.category,AVG(cam.budget),COUNT(cam.name) as camCount\
+      "SELECT comp.company_id,comp.name,comp.category,ROUND(AVG(cam.budget),2) as avg,COUNT(cam.name) as camCount\
        FROM company comp\
         LEFT JOIN campaign cam ON comp.company_id = cam.company_id\
          GROUP BY comp.name,comp.category,comp.company_id;"

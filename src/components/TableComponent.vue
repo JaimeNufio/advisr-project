@@ -31,7 +31,9 @@
             <template #cell(name)="row">
                 <b-link  :to="`/company?index=${row.item.company_id}`" class="tablelink">{{row.item.name}}</b-link>
             </template>
+
             
+
             </b-table>
         </b-container>
   </div>
